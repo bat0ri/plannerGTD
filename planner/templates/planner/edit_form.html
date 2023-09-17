@@ -1,0 +1,32 @@
+<form id="edit-task-form" class="edittask_section" method="post" action="{% url 'edit_task' task_id=0 %}">
+  {% csrf_token %}
+  <input type="hidden" name="task_id" value="">
+  {{ edit.task }}
+  <div class="addtask_options">
+    {{ edit.description }}
+  </div>
+  <div class="edit-task-options-first">
+      {{ edit.finish }}
+      <div class="addtask_options_category">
+          <select name="category" id="id_category" class="select2-category-edit" style="margin: 8px">
+              <option value=""></option>
+              {% for c in cat %}
+                  <option value="{{ c.pk }}">{{ c.name }}</option>
+              {% endfor %}
+          </select>
+      </div>
+  </div>
+    <div class="edit-task-labels-field">
+    <select name="labels" id="id_labels" multiple="multiple" class="select2-edit" style="width: 50%; background-color: #4a4a4a;">
+            {% for l in labels %}
+                <div class="choise_label" style="display: flex; flex-direction: row;">
+                    <div class="label_color" style="background-color: {{ l.color }}"></div>
+                    <option value="{{ l.pk }}">{{ l.name }}</option>
+                </div>
+            {% endfor %}
+        </select>
+    </div>
+  <div class="addtask_buttons_field">
+    <button class="addtask_submit_btn" type="submit" style="width: 50px; height: 30px;">Update</button>
+  </div>
+</form>

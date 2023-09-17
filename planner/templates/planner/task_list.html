@@ -1,0 +1,16 @@
+<div class="task_list_section">
+    {% for t in tasks %}
+        <div class="task" data-task-id="{{ t.id }}">
+            <a class="task_checkbox" href="{% url 'delete' t.id %}"></a>
+            <div class="task_info">
+                <div class="task_name">{{ t.task }}</div>
+                <div class="task_description">{{ t.description }}</div>
+            </div>
+            {% for l in t.labels.all %}
+                <div class="task_labels" lab_pk = "{{ l.pk }}" style="color: {{ l.color }}">{{ l.name|default_if_none:"-" }}</div>
+            {% endfor %}
+            <div class="task_date" date="{{ t.finish|date:'d.m.Y' }}">{{ t.finish|default_if_none:"-"  }}</div>
+            <div class="task_cat">{{ t.category|default_if_none:"-" }}</div>
+        </div>
+    {% endfor %}
+</div>

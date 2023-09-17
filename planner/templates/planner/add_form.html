@@ -1,0 +1,33 @@
+<div class="slide-add-form">Добавить задачу</div>
+<form class="form-task-add" method="post" id="task-add">
+    {% csrf_token %}
+    {{ form.task }}
+    <div class="addtask_options">
+        {{ form.description }}
+    </div>
+    <div class="addtask_buttons_field">
+      <div class="addtask_options_date">
+        {{ form.finish }}
+      </div>
+      <div class="addtask_options_category">
+          <select name="category" id="id_category" class="select2-category" style="margin: 8px">
+              <option value=""></option>
+              {% for c in cat %}
+                  <option value="{{ c.pk }}">{{ c.name }}</option>
+              {% endfor %}
+          </select>
+      </div>
+    <div class="addtask_options_category">
+        <select name="labels" id="id_labels" multiple="multiple" class="select2-add" style="width: 50%; background-color: #4a4a4a;">
+            {% for l in labels %}
+                <div class="choise_label" style="display: flex; flex-direction: row;">
+                    <div class="label_color" style="background-color: {{ l.color }}"></div>
+                    <option value="{{ l.pk }}">{{ l.name }}</option>
+                </div>
+            {% endfor %}
+        </select>
+    </div>
+        <button class="addtask_cancel_btn" type="reset">X</button>
+      <button class="addtask_submit_btn" type="submit">+</button>
+    </div>
+</form>
